@@ -30,14 +30,16 @@ def valid_input(prompt:str)->bool:
 def generate_keywords(prompt:str)->List[str]:
     openai.api_key=OPENAI_KEY
     generated_prompt=f"Generate branding keywords for {prompt}: "
-    response=openai.Completion.create(model='davinci', prompt=generated_prompt, temperature=0, max_tokens=MAX_TOKEN_LENGTH)
+    response=openai.Completion.create(model='text-davinci-003', prompt=generated_prompt, temperature=0, max_tokens=MAX_TOKEN_LENGTH)
+    print(response)
     keywords=response['choices'][0]['text']
     #We are going to strip the keywords by using regex
     keywords=keywords.strip()
+    
     keywords_arr=re.split(',|\n|;|-', keywords)
     keywords_arr=[keyword.lower().strip() for keyword in keywords_arr]
-    keywords_arr=[keyword for keyword in keywords_arr if len(keyword) != '']
-    print(f"Keywords Result: {list(enumerate(keywords_arr))}")
+    keywords_arr=[k for k in keywords_arr if k and re.match(r'\d+\.(?:[ \t]*[^\s]+)+', k)]
+    print(f"Keywords Result: {keywords_arr}")
     return keywords_arr
 
 def generate_snippet(prompt:str)->str:
@@ -51,14 +53,14 @@ def generate_snippet(prompt:str)->str:
     brand_snippet:str = response['choices'][0]['text']
     #strip the snippet by removing the spaces
     brand_snippet=brand_snippet.strip()
+    brand_snippet=brand_snippet.strip('/')
+    brand_snippet=brand_snippet.strip('\t')
     #Add the dots to the end of the snippet
     last_dot = brand_snippet[-1]
     if last_dot != {'.','!','?'}:
         brand_snippet+='...'
     print(f"Snippet Result: {brand_snippet}")
-    return brand_snippet
-
-
+    return brand_snippet[1:]
 
 
 if __name__ == "__main__":
