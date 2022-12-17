@@ -3,7 +3,7 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 import * as lambda from 'aws-cdk-lib/aws-lambda'
-import { Lambda } from 'aws-cdk-lib/aws-ses-actions';
+//import { Lambda } from 'aws-cdk-lib/aws-ses-actions';
 
 export class CopykittInfraStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -16,9 +16,7 @@ export class CopykittInfraStack extends cdk.Stack {
         //code: lambda.Code.fromAsset("../SaaS-Project",)
         code: lambda.Code.fromAsset("../app",),
         handler:"copykitt_api.handler"
-      }
-      
-      )
+      })
       
     }
     // example resource
