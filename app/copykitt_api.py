@@ -2,6 +2,7 @@ MAX_INPUT_LENGTH=32
 # uvicorn copykitt_api:app --reload
 from fastapi import FastAPI, HTTPException
 from copykitt import generate_snippet, generate_keywords
+from mangum import Mangum
 
 app = FastAPI()
 
