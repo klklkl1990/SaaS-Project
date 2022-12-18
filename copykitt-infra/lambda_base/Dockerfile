@@ -11,6 +11,7 @@ RUN yum install -y python37 && \
     yum clean all
 
 # Set up PIP and Venv
+RUN python3 -m pip install mangum
 RUN python3 -m pip install --upgrade pip && \
     python3 -m pip install virtualenv
 RUN python3 -m venv base
