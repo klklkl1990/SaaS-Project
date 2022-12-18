@@ -5,6 +5,9 @@ from copykitt import generate_snippet, generate_keywords
 from mangum import Mangum
 
 app = FastAPI()
+#how did I forget this line??
+handler = Mangum(app)
+
 
 @app.get("/generate_snippet_and_keywords")
 async def generate_snippet_api(prompt: str):
