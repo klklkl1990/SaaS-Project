@@ -6,6 +6,8 @@ FROM amazonlinux:2
 RUN yum install -y python37 && \
     yum install -y python3-pip && \
     yum install -y zip && \
+    yum install -y unzip && \
+    yum install -y numpy && \
     yum clean all
 
 # Set up PIP and Venv
